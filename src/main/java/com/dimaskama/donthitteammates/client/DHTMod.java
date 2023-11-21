@@ -64,7 +64,7 @@ public class DHTMod implements ClientModInitializer {
     }
 
     public static boolean shouldProtect(OtherClientPlayerEntity player) {
-        return CONFIG.teammates.stream().anyMatch(teammate -> teammate.name.equalsIgnoreCase(player.getGameProfile().getName()));
+        return CONFIG.teammates.stream().anyMatch(teammate -> teammate.name.equalsIgnoreCase(player.getGameProfile().getName()) && teammate.enabled);
     }
 
     private static final class ModCommand implements ClientCommandRegistrationCallback {
