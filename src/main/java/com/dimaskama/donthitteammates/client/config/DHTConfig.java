@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DHTConfig extends Config {
     public boolean save_enabled_state = true;
-    public boolean enabled = false;
+    public boolean enabled = true;
     public boolean save_teammates_list = true;
     public List<Teammate> teammates = new ArrayList<>();
 
