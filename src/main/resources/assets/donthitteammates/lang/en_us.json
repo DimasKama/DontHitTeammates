@@ -1,0 +1,10 @@
+{
+  "donthitteammates": "Dont Hit Teammates",
+  "message.donthitteammates.enabled": "DHT enabled",
+  "message.donthitteammates.set_config_value": "[DHT] Config value '%s' set to '%s'",
+  "key.donthitteammates.toggle": "Toggle DHT",
+  "key.donthitteammates.menu": "Open Teammates List",
+  "text.donthitteammates.nickname_input": "Nickname",
+  "error.donthitteammates.black_nickname": "Nickname field is blank",
+  "error.donthitteammates.already_in_list": "This player is already in list"
+}

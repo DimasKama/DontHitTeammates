@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "donthitteammates",
+  "version": "${version}",
+  "name": "DontHitTeammates",
+  "description": "Dont ruin the game!",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Mynam/DontHitTeammates"
+  },
+  "license": "MIT",
+  "icon": "assets/donthitteammates/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.dimaskama.donthitteammates.client.DHTMod"
+    ],
+    "modmenu": [
+      "com.dimaskama.donthitteammates.client.screen.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "donthitteammates.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

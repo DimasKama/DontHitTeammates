@@ -1,0 +1,10 @@
+{
+  "donthitteammates": "Dont Hit Teammates",
+  "message.donthitteammates.enabled": "DHT включен",
+  "message.donthitteammates.set_config_value": "[DHT] Значение конфига '%s' установлено на '%s'",
+  "key.donthitteammates.toggle": "Переключить DHT",
+  "key.donthitteammates.menu": "Открыть список тиммейтов",
+  "text.donthitteammates.nickname_input": "Никнейм",
+  "error.donthitteammates.black_nickname": "Поле никнейма пустое",
+  "error.donthitteammates.already_in_list": "Этот игрок уже в списке тиммейтов"
+}
