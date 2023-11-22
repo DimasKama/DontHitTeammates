@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "DontHitTeammates",
   "description": "Dont ruin the game!",
-  "authors": [],
+  "authors": [
+    "DimasKama"
+  ],
   "contact": {
     "repo": "https://github.com/Mynam/DontHitTeammates"
   },
