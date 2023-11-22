@@ -59,7 +59,17 @@ public class DHTScreen extends Screen {
             );
             inputField.setPlaceholder(INPUT_PLACEHOLDER);
             inputField.setChangedListener(string -> {
-                if (!string.isBlank()) inputTexture = getSkinByName(string);
+                if (!string.isEmpty()) {
+                    if (string.endsWith(" ")) {
+                        inputField.setText(string.replaceAll(" ", ""));
+                        addTeammate();
+                        return;
+                    }
+                    AbstractClientPlayerEntity player = findMatchingPlayer(string);
+                    inputTexture = player != null ? player.getSkinTexture() : UNKNOWN_PLAYER_TEXTURE;
+                } else {
+                    inputTexture = UNKNOWN_PLAYER_TEXTURE;
+                }
             });
 
             addDrawableChild(inputField);
@@ -76,26 +86,28 @@ public class DHTScreen extends Screen {
                 22,
                 ACCEPT_BUTTON,
                 22, 44,
-                button -> {
-                    String nickname = inputField.getText();
-                    inputField.setText("");
-                    focusOn(inputField);
-                    if (nickname.isBlank()) {
-                        setErrorText(BLACK_NICKNAME_ERROR);
-                        return;
-                    }
-                    if (listWidget.hasNickname(nickname)) {
-                        setErrorText(ALREADY_IN_LIST_ERROR);
-                        return;
-                    }
-                    listWidget.addTeammate(new Teammate(nickname));
-                }
+                button -> addTeammate()
         ));
 
         // Back button
         addDrawableChild(ButtonWidget.builder(ScreenTexts.BACK, button -> {
             close();
         }).dimensions((width - 120) >> 1, height - 28, 120, 20).build());
+    }
+
+    private void addTeammate() {
+        String nickname = inputField.getText();
+        inputField.setText("");
+        focusOn(inputField);
+        if (nickname.isBlank()) {
+            setErrorText(BLACK_NICKNAME_ERROR);
+            return;
+        }
+        if (listWidget.hasNickname(nickname)) {
+            setErrorText(ALREADY_IN_LIST_ERROR);
+            return;
+        }
+        listWidget.addTeammate(new Teammate(nickname));
     }
 
     private void setErrorText(Text errorText) {
@@ -138,16 +150,15 @@ public class DHTScreen extends Screen {
         else super.close();
     }
 
-    public static Identifier getSkinByName(String name) {
+    public static AbstractClientPlayerEntity findMatchingPlayer(String nickname) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        Identifier skin = UNKNOWN_PLAYER_TEXTURE;
         if (player != null) {
-            PlayerEntity renderPlayer = player.getWorld().getPlayers().stream().filter(p -> p.getEntityName().equalsIgnoreCase(name)).findAny().orElse(null);
+            PlayerEntity renderPlayer = player.getWorld().getPlayers().stream().filter(p -> p.getEntityName().equalsIgnoreCase(nickname)).findAny().orElse(null);
             if (renderPlayer instanceof AbstractClientPlayerEntity p) {
-                skin = p.getSkinTexture();
+                return p;
             }
         }
-        return skin;
+        return null;
     }
 
     public static class TeammatesListWidget extends EntryListWidget<TeammatesListWidget.Entry> {
@@ -195,7 +206,13 @@ public class DHTScreen extends Screen {
                 this.list = list;
                 this.teammate = teammate;
 
-                skinTexture = getSkinByName(teammate.name);
+                AbstractClientPlayerEntity player = findMatchingPlayer(teammate.name);
+                if (player != null) {
+                    teammate.name = player.getEntityName();
+                    skinTexture = player.getSkinTexture();
+                } else {
+                    skinTexture = UNKNOWN_PLAYER_TEXTURE;
+                }
 
                 removeButton = ButtonWidget.builder(X_TEXT, button -> {
                     this.list.removeEntry(this);
@@ -240,11 +257,11 @@ public class DHTScreen extends Screen {
             public boolean mouseClicked(double mouseX, double mouseY, int button) {
                 if (removeButton.isMouseOver(mouseX, mouseY)) {
                     removeButton.mouseClicked(mouseX, mouseY, button);
-                }
-                else if (hideButton.isMouseOver(mouseX, mouseY)) {
+                } else if (hideButton.isMouseOver(mouseX, mouseY)) {
                     hideButton.mouseClicked(mouseX, mouseY, button);
+                } else {
+                    return true;
                 }
-                else return true;
                 return false;
             }
 

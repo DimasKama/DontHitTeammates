@@ -22,18 +22,18 @@ public abstract class Config {
         if (!file.exists()) {
             File parent = file.getParentFile();
             if (!(parent.exists() || parent.mkdirs()))
-                DHTMod.LOGGER.error("Can't create config: " + parent.getAbsolutePath());
+                DHTMod.LOGGER.warn("Can't create config: " + parent.getAbsolutePath());
             try {
                 saveJsonWithoutCatch();
             } catch (IOException e) {
-                DHTMod.LOGGER.error("Exception occurred while writing new config. " + e);
+                DHTMod.LOGGER.warn("Exception occurred while writing new config. " + e);
             }
         } else {
             try (FileReader f = new FileReader(CONFPATH)) {
                 Config c = new Gson().fromJson(f, getClass());
                 for (Field field : getClass().getDeclaredFields()) field.set(this, field.get(c));
             } catch (IOException | IllegalAccessException e) {
-                DHTMod.LOGGER.error("Exception occurred while reading config. " + e);
+                DHTMod.LOGGER.warn("Exception occurred while reading config. " + e);
             }
         }
     }
@@ -42,7 +42,7 @@ public abstract class Config {
         try {
             saveJsonWithoutCatch();
         } catch (IOException e) {
-            DHTMod.LOGGER.error("Exception occurred while saving config. " + e);
+            DHTMod.LOGGER.warn("Exception occurred while saving config. " + e);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class Config {
             Config n = getClass().getConstructor(String.class).newInstance(CONFPATH);
             for (Field field : getClass().getDeclaredFields()) field.set(this, field.get(n));
         } catch (Exception e) {
-            DHTMod.LOGGER.error("Exception occurred while resetting config. " + e);
+            DHTMod.LOGGER.warn("Exception occurred while resetting config. " + e);
         }
     }
 }

@@ -3,7 +3,6 @@ package com.dimaskama.donthitteammates.mixin;
 import com.dimaskama.donthitteammates.client.DHTMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.OtherClientPlayerEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,11 +22,13 @@ public abstract class MinecraftClientMixin {
     )
     private void dontAttackTeammates(CallbackInfoReturnable<Boolean> cir) {
         HitResult crosshairTarget = ((MinecraftClient) (Object) this).crosshairTarget;
-        if (crosshairTarget != null && crosshairTarget.getType() == HitResult.Type.ENTITY) {
-            Entity target = ((EntityHitResult) crosshairTarget).getEntity();
-            if (target instanceof OtherClientPlayerEntity p && DHTMod.CONFIG.enabled && DHTMod.shouldProtect(p)) {
-                cir.setReturnValue(false);
-            }
+        if (
+                crosshairTarget != null
+                && crosshairTarget.getType() == HitResult.Type.ENTITY
+                && ((EntityHitResult) crosshairTarget).getEntity() instanceof OtherClientPlayerEntity p
+                && DHTMod.CONFIG.enabled && DHTMod.shouldProtect(p)
+        ) {
+            cir.setReturnValue(false);
         }
     }
 }
