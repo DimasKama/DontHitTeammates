@@ -1,0 +1,12 @@
+{
+  "modmenu.summaryTranslation.donthitteammates": "Уенны бозмагыз!",
+  "modmenu.descriptionTranslation.donthitteammates": "Көйләнә торган төркемдәшләргә һөҗүм итәргә комачаулаучы Fabric мод.",
+  "donthitteammates": "Dont Hit Teammates",
+  "message.donthitteammates.enabled": "DHT кушык",
+  "message.donthitteammates.set_config_value": "[DHT] «%s» көйләү кыйммәте «%s» кыйммәтенә үзгәртелде",
+  "key.donthitteammates.toggle": "DHT күчерү",
+  "key.donthitteammates.menu": "Төркемдәшләр исемлеген ачу",
+  "text.donthitteammates.nickname_input": "Кушамат",
+  "error.donthitteammates.black_nickname": "Кушамат кыры буш",
+  "error.donthitteammates.already_in_list": "Күрсәтелгән уенчы исемлектә бар инде"
+}
