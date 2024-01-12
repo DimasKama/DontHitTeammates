@@ -25,7 +25,7 @@ import java.util.List;
 public class DHTScreen extends Screen {
     public static final Text X_TEXT = Text.literal("X");
     public static final Text INPUT_PLACEHOLDER = Text.translatable("text.donthitteammates.nickname_input").styled(style -> style.withColor(0x777777));
-    public static final Text BLACK_NICKNAME_ERROR = Text.translatable("error.donthitteammates.black_nickname");
+    public static final Text BLANK_NICKNAME_ERROR = Text.translatable("error.donthitteammates.blank_nickname");
     public static final Text ALREADY_IN_LIST_ERROR = Text.translatable("error.donthitteammates.already_in_list");
     public static final Identifier UNKNOWN_PLAYER_TEXTURE = new Identifier(DHTMod.MOD_ID, "textures/gui/unknown_player.png");
     public static final Identifier ACCEPT_BUTTON = new Identifier(DHTMod.MOD_ID, "textures/gui/accept_button.png");
@@ -100,7 +100,7 @@ public class DHTScreen extends Screen {
         inputField.setText("");
         focusOn(inputField);
         if (nickname.isBlank()) {
-            setErrorText(BLACK_NICKNAME_ERROR);
+            setErrorText(BLANK_NICKNAME_ERROR);
             return;
         }
         if (listWidget.hasNickname(nickname)) {

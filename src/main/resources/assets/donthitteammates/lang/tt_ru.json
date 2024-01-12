@@ -7,6 +7,6 @@
   "key.donthitteammates.toggle": "DHT күчерү",
   "key.donthitteammates.menu": "Төркемдәшләр исемлеген ачу",
   "text.donthitteammates.nickname_input": "Кушамат",
-  "error.donthitteammates.black_nickname": "Кушамат кыры буш",
+  "error.donthitteammates.blank_nickname": "Кушамат кыры буш",
   "error.donthitteammates.already_in_list": "Күрсәтелгән уенчы исемлектә бар инде"
 }
